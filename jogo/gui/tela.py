@@ -1,4 +1,5 @@
 from .cores import CORES
+from ..personagens.tesouro import Tesouro
 
 import pygame
 
@@ -31,7 +32,7 @@ class Tela:
         self.informacoes(aventureiro)
         self.dificuldade(aventureiro.dificuldade)
         self.personagem(tesouro)
-        self.personagem(aventureiro, cor=aventureiro.cor)
+        self.personagem(aventureiro)
         self.personagem(npc)
         self.mapa(aventureiro, tesouro, npc)
         pygame.display.update()
@@ -43,22 +44,25 @@ class Tela:
                 if [linha, coluna] not in [aventureiro.posicao, tesouro.posicao, npc.posicao]:
                     self.display.blit(texto, centralizar_texto(texto, [linha, coluna]))
 
-    def personagem(self, personagem, cor=CORES.branco):
+    def personagem(self, personagem):
+        if isinstance(personagem, Tesouro):
+            cor = CORES.vermelho 
+        else:
+            cor = CORES.branco 
+
         texto = self.fonte_gde.render(personagem.char, True, cor)
         self.display.blit(
-            texto,
-            centralizar_texto(texto, [personagem.posicao[0], personagem.posicao[1]])
-        )
+        texto,
+        centralizar_texto(texto, [personagem.posicao[0], personagem.posicao[1]])
+    )
 
     def informacoes(self, aventureiro):
-        atributos = f"{aventureiro.nome} nv. {aventureiro.nivel} - " \
+        atributos = f"{aventureiro.nome} nv. {aventureiro.nivel} ({aventureiro.xp} / {aventureiro.xp_por_nivel}) - " \
             f"Vida: {aventureiro.vida} / Força: {aventureiro.forca} / Defesa: {aventureiro.defesa}"
         texto = self.fonte_peq.render(atributos, True, CORES.branco)
-        self.display.blit(texto, [MARGEM, ALTURA - MARGEM - texto.get_height()])
+        
+        x_centralizado = LARGURA // 2 - texto.get_width() // 2
+        self.display.blit(texto, [x_centralizado, ALTURA - MARGEM - texto.get_height()])
 
         texto = self.fonte_peq.render(aventureiro.status, True, CORES.branco)
         self.display.blit(texto, [MARGEM, MARGEM])
-
-
-
-    

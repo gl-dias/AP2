@@ -1,4 +1,7 @@
-[x] desenhar o mapa na tela [x] implementar os movimentos e a resposta do teclado [x] exibir os atributos do jogador na tela [x] incluir na tela um resumo do combate
+[x] desenhar o mapa na tela 
+[x] implementar os movimentos e a resposta do teclado 
+[x] exibir os atributos do jogador na tela 
+[x] incluir na tela um resumo do combate
 
 [x] boss
 
@@ -52,7 +55,7 @@ Criar botões no teclado para realizar as operações
 [ ] itens de cura 
 [ ] sistema de itens, armas e equipamentos 
 [ ] sistema de níveis/andares 
-[ ] nomear os monstros 
+[x] nomear os monstros 
 [ ] adicionar variações de terrenos 
 [ ] iluminação do jogo 
 [ ] mapa com várias salas 
@@ -60,7 +63,7 @@ Criar botões no teclado para realizar as operações
 [ ] sistema financeiro no jogo 
 [ ] easter eggs 
 [ ] interação do jogo com o jogador 
-[ ] dificuldade do jogo 
+[x] dificuldade do jogo 
 [ ] IA de monstros 
 [ ] pet 
 [ ] loja 
