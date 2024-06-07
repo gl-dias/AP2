@@ -1,5 +1,7 @@
 from .cores import CORES
 from ..personagens.tesouro import Tesouro
+from ..personagens.pocao import Pocao
+from ..personagens.aventureiro.aventureiro import Aventureiro
 
 import pygame
 
@@ -27,26 +29,35 @@ class Tela:
         texto = self.fonte_peq.render(dif, True, CORES.branco)
         self.display.blit(texto, [LARGURA - texto.get_width() - MARGEM, MARGEM])
 
-    def renderizar(self, aventureiro, tesouro, npc):
+    def renderizar(self, aventureiro, tesouro, npc, pocao):
         self.display.fill(CORES.preto)
         self.informacoes(aventureiro)
         self.dificuldade(aventureiro.dificuldade)
         self.personagem(tesouro)
         self.personagem(aventureiro)
         self.personagem(npc)
-        self.mapa(aventureiro, tesouro, npc)
+        if pocao is not None:
+            self.personagem(pocao)
+        self.mapa(aventureiro, tesouro, npc, pocao)
         pygame.display.update()
 
-    def mapa(self, aventureiro, tesouro, npc):
+    def mapa(self, aventureiro, tesouro, npc, pocao):
         texto = self.fonte_gde.render(".", True, CORES.branco)
         for linha in range(10):
             for coluna in range(10):
-                if [linha, coluna] not in [aventureiro.posicao, tesouro.posicao, npc.posicao]:
+                posicoes = [aventureiro.posicao, tesouro.posicao, npc.posicao]
+                if pocao is not None:
+                    posicoes.append(pocao.posicao)
+                if [linha, coluna] not in posicoes:
                     self.display.blit(texto, centralizar_texto(texto, [linha, coluna]))
 
     def personagem(self, personagem):
         if isinstance(personagem, Tesouro):
-            cor = CORES.vermelho 
+            cor = CORES.vermelho
+        elif isinstance(personagem, Pocao):
+            cor = CORES.azul
+        elif isinstance(personagem, Aventureiro):
+            cor = personagem.cor
         else:
             cor = CORES.branco 
 

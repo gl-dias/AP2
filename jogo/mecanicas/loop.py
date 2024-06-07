@@ -1,4 +1,5 @@
 import time
+import random
 
 from . import som
 from . import mecanicas
@@ -12,6 +13,7 @@ from ..personagens.aventureiro.guerreiro import Guerreiro
 from ..personagens.aventureiro.tank import Tank
 from ..personagens.tesouro import Tesouro
 from ..personagens.npc import NPC
+from ..personagens.pocao import Pocao
 from ..personagens.inimigos.boss import Boss
 
 import pygame
@@ -43,6 +45,7 @@ def executar():
 
     tesouro = Tesouro()
     npc = NPC(tesouro)
+    pocao = Pocao([random.randint(0, 9), random.randint(0, 9)])
     tela = Tela()
 
     jogo_rodando = True
@@ -57,8 +60,8 @@ def executar():
                 # Processamento do jogo
                 if teclas[pygame.K_q]:
                     aventureiro.status = "Já correndo?"
-                    jogo_rodando = False
-
+                    jogo_rodando = False   
+                    
                 if teclas[pygame.K_c]:
                     aventureiro.trocar_char()
                 elif teclas[pygame.K_v]:
@@ -76,7 +79,9 @@ def executar():
                     direcao = determinar_direcao(teclas)
                     if direcao != "" and not mecanicas.movimentar(aventureiro, direcao, npc):
                         jogo_rodando = False
-
+                    if pocao is not None and aventureiro.posicao == pocao.posicao:
+                        aventureiro.usar_pocao(pocao)
+                        pocao = None
                     if aventureiro.posicao == tesouro.posicao:
                         boss = Boss(aventureiro.dificuldade)
                         if mecanicas.iniciar_combate(aventureiro, boss):
@@ -86,7 +91,7 @@ def executar():
                         jogo_rodando = False
 
         # Renderização na tela
-        tela.renderizar(aventureiro, tesouro, npc)
+        tela.renderizar(aventureiro, tesouro, npc, pocao)
         pygame.time.Clock().tick(60)
 
     time.sleep(2)

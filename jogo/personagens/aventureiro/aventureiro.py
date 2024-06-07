@@ -104,3 +104,10 @@ class Aventureiro:
 
     def diminuir_dificuldade(self):
         self.dificuldade /= 1.1
+
+    def usar_pocao(self, pocao):
+        buff = random.choice(list(pocao.buffs.keys())) 
+        if buff == "vida":
+            self.vida *= pocao.buffs[buff]
+        else:
+            setattr(self, buff, getattr(self, buff) + pocao.buffs[buff])
