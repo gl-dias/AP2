@@ -1,7 +1,7 @@
 import os.path
 import random
 
-from ..mecanicas import som
+from ...mecanicas import som
 
 import pygame
 
@@ -21,3 +21,5 @@ class NPC:
     def falar():
         oi = pygame.mixer.Sound(os.path.join(som.DIRETORIO, "npc.wav"))
         pygame.mixer.Sound.play(oi)
+
+    

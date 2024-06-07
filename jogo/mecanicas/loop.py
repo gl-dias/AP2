@@ -12,7 +12,7 @@ from ..personagens.aventureiro.aventureiro import Aventureiro
 from ..personagens.aventureiro.guerreiro import Guerreiro
 from ..personagens.aventureiro.tank import Tank
 from ..personagens.tesouro import Tesouro
-from ..personagens.npc import NPC
+from ..personagens.npc.npc import NPC
 from ..personagens.pocao import Pocao
 from ..personagens.inimigos.boss import Boss
 
@@ -48,6 +48,9 @@ def executar():
     pocao = Pocao([random.randint(0, 9), random.randint(0, 9)])
     tela = Tela()
 
+    if pocao == npc or pocao == tesouro:
+        pocao = Pocao([random.randint(0, 9), random.randint(0, 9)])
+
     jogo_rodando = True
     while jogo_rodando:
         # Análise dos eventos
@@ -74,7 +77,7 @@ def executar():
                     aventureiro.diminuir_dificuldade()
 
                 if teclas[pygame.K_SPACE]:
-                    mecanicas.conversar(aventureiro, npc)
+                    mecanicas.conversar(aventureiro, npc)    
                 else:
                     direcao = determinar_direcao(teclas)
                     if direcao != "" and not mecanicas.movimentar(aventureiro, direcao, npc):

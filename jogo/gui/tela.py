@@ -77,3 +77,5 @@ class Tela:
 
         texto = self.fonte_peq.render(aventureiro.status, True, CORES.branco)
         self.display.blit(texto, [MARGEM, MARGEM])
+
+    
