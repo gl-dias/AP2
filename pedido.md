@@ -1,1 +1,0 @@
-Inclua uma nova funcionalidade para o jogo! Essa nova funcionalidade pode render até um ponto extra na nota do projeto (até o limite de 10,0). Quanto mais complexa a funcionalidade, maior a pontuação que será concedida.
