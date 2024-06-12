@@ -2,6 +2,7 @@ import os.path
 import random
 
 from ...mecanicas import som
+from ...mecanicas.buttonboxnpc import escolher_aprimoramento
 
 import pygame
 
@@ -22,4 +23,7 @@ class NPC:
         oi = pygame.mixer.Sound(os.path.join(som.DIRETORIO, "npc.wav"))
         pygame.mixer.Sound.play(oi)
 
-    
+    def abrir_loja(self, aventureiro):
+        if aventureiro.nivel <= 1:
+            return None
+        return escolher_aprimoramento()

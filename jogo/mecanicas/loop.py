@@ -77,7 +77,16 @@ def executar():
                     aventureiro.diminuir_dificuldade()
 
                 if teclas[pygame.K_SPACE]:
-                    mecanicas.conversar(aventureiro, npc)    
+                    mecanicas.conversar(aventureiro, npc)
+                    aprimoramento = npc.abrir_loja(aventureiro)
+                    if aprimoramento:
+                        if aprimoramento == "Arma" and aventureiro.nivel > 0:
+                            aventureiro.forca += 3
+                            aventureiro.nivel -= 1
+                        elif aprimoramento == "Armadura" and aventureiro.nivel > 0:
+                            aventureiro.defesa += 3
+                            aventureiro.nivel -= 1
+                    tela = Tela()
                 else:
                     direcao = determinar_direcao(teclas)
                     if direcao != "" and not mecanicas.movimentar(aventureiro, direcao, npc):
